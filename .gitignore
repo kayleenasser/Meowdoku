@@ -8,7 +8,7 @@ __pycache__/
 
 src/.idea/
 .idea/
-src/Unity/Sudoku/Assets
+
 src/Unity/Sudoku/Library
 src/Unity/Sudoku/Logs
 src/Unity/Sudoku/Packages
