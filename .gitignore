@@ -9,6 +9,9 @@ __pycache__/
 src/.idea/
 .idea/
 
+src/Unity/Sudoku/Sudoku.sln
+src/Unity/Sudoku/obj/Debug
+src/Unity/Sudoku/Assembly-CSharp.csproj
 src/Unity/Sudoku/Library
 src/Unity/Sudoku/Logs
 src/Unity/Sudoku/Packages
