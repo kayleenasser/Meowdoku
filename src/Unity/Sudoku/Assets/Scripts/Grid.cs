@@ -40,7 +40,7 @@ public class Grid : MonoBehaviour
             {
                 grid_squares_.Add(Instantiate(grid_square) as GameObject);
                 grid_squares_[grid_squares_.Count - 1].transform.parent = this.transform; ///Instantiatet this game object as a child of the object holding this script
-                grid_squares_[grid_squares_.Count - 1].transform.localScale = new Vector2(square_scale, square_scale);
+                grid_squares_[grid_squares_.Count - 1].transform.localScale = new Vector3(square_scale, square_scale, square_scale);
             }
         }
     }
