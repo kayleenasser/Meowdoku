@@ -77,7 +77,15 @@ public class Grid : MonoBehaviour
     { 
         foreach(var square in grid_squares_)
         {
-            square.GetComponent<GridSquare>().SetNumber(Random.Range(0, 10)); // Random for testing for now
+            square.GetComponent<GridSquare>().SetNumber(0);
         }
+    }
+
+    public bool CheckSpace(int value)
+    {
+        int row_box = 9 - 9 % 3;
+        int col_box = 9 - 9 % 3;
+
+        return true;
     }
 }
