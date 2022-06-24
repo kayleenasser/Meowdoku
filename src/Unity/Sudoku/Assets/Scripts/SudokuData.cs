@@ -7,23 +7,19 @@ public class HandleTextFile
 {   
     public static char[] ReadString(string path)
     {
-        char[] CharacterArrayEasy = new char[81];
+        char[] CharacterArray = new char[81];
         //Read the text from directly from the test.txt file
-        int linenum = Random.Range(1, 10000);
-        using (Stream stream = File.Open(path, FileMode.Open))
+        int ran_line = Random.Range(1, 10000);
+        Debug.Log(ran_line);
+
+        string[] stringdata = File.ReadAllLines(path);
+        string line_string = stringdata[ran_line];
+
+        for (int i = 0; i < 81; i++)
         {
-            stream.Seek(81 * (linenum - 1), SeekOrigin.Begin);
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                string easydata = reader.ReadLine();
-                // Copy character by character into array 
-                for (int i = 0; i < easydata.Length; i++)
-                {
-                    CharacterArrayEasy[i] = easydata[i];
-                }
-            }
+            CharacterArray[i] = line_string[i];
         }
-        return CharacterArrayEasy;
+        return CharacterArray;
     }
 }
 
@@ -112,6 +108,7 @@ public class SudokuEasyData : MonoBehaviour
     {
         
         char [] board_char = HandleTextFile.ReadString("Assets/Resources/Easy.txt");
+        Debug.Log(board_char);
         char[] solution_char = SudokuSolver.solveSudoku(board_char);
         int[] Sudoku_board = board_char.Select(a => a - '0').ToArray();
         int[] Sudoku_solution =solution_char.Select(a => a - '0').ToArray();
