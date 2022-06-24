@@ -74,18 +74,20 @@ public class Grid : MonoBehaviour
     }
 
     private void SetGridNumbers()
-    { 
-        foreach(var square in grid_squares_)
-        {
-            square.GetComponent<GridSquare>().SetNumber(0);
-        }
-    }
-
-    public bool CheckSpace(int value)
     {
-        int row_box = 9 - 9 % 3;
-        int col_box = 9 - 9 % 3;
+        BoardGen BoardGen = new BoardGen();
+        int[,] solution = BoardGen.Generate_Solution_Board();
+        int[,] board = BoardGen.Generate_Game_Board();
+        foreach (var square in grid_squares_)
+        {
+            for(int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    square.GetComponent<GridSquare>().SetNumber(9);
+                }
+            }
 
-        return true;
+        }
     }
 }
