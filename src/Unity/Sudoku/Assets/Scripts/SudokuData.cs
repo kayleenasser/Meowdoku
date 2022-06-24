@@ -1,165 +1,211 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class BoardGen : MonoBehaviour {
-    public int size = 9;
-    public int grid_area = 81;
-    public int[,] board;
-    public int[,] solution;
-
-    private int[,] empty_board = new int[,] {
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    {0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0},
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    {0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    {0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    {0, 0, 0, 0, 0, 0, 0, 0, 0}
-    };
-
-    private int[,] solution_board = new int[,] {
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    {0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0},
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    {0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    {0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    {0, 0, 0, 0, 0, 0, 0, 0, 0}
-    };
-
-
-    // Randomizes the board by adding some random inputs
-    private int[,] Random_generation(int[,] correct_board)
+using System.IO;
+using System.Linq;
+public class HandleTextFile
+{   
+    public static char[] ReadString(string path)
     {
-        for (int i = 0; i < size; i++)
+        char[] CharacterArrayEasy = new char[81];
+        //Read the text from directly from the test.txt file
+        int linenum = Random.Range(1, 10000);
+        using (Stream stream = File.Open(path, FileMode.Open))
         {
-            int grid_x = Random.Range(0, size - 1);
-            int grid_y = Random.Range(0, size - 1);
-            int number = Random.Range(1, size);
-
-            if (Check_space(correct_board, grid_x, grid_y, number))
-                correct_board[grid_x, grid_y] = number;
-
-        }
-        if (Solution_Board(correct_board, 0, 0))
-        {
-            return correct_board;
-        }
-        else
-        {
-            print("No solutions exist");
-            correct_board = Clear_board(correct_board);
-            Random_generation(correct_board);
-        }
-        print("Error if code reaches this point");
-        return null;
-    }
-
-    //Function that checks if space can be a valid input
-    private bool Check_space(int[,] grid, int x, int y, int value)
-    {
-        // Look at the 3 x 3 box, if the number is already there, return false
-        int row_box = x - x % 3;
-        int col_box = y - y % 3;
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
+            stream.Seek(81 * (linenum - 1), SeekOrigin.Begin);
+            using (StreamReader reader = new StreamReader(stream))
             {
-                if (grid[i + row_box, j + col_box] == value)
-                    return false;
+                string easydata = reader.ReadLine();
+                // Copy character by character into array 
+                for (int i = 0; i < easydata.Length; i++)
+                {
+                    CharacterArrayEasy[i] = easydata[i];
+                }
             }
         }
-        //If the number is already in that row, return false
-        for (int i = 0; i < size; i++)
+        return CharacterArrayEasy;
+    }
+}
+
+public class SudokuSolver : MonoBehaviour
+{
+    public static char[] solveSudoku(char[] board)
+    {
+        char[] sol_char;
+        int counter = 0;
+        if (board == null || board.Length == 0)
+            return null;
+        char[,] boardarray = new char[9, 9];
+        for (int i = 0; i < 9; i++)
         {
-            if (grid[x, i] == value)
+            for (int j = 0; j < 9; j++)
+            {
+                boardarray[i, j] = (char)board[counter];
+                counter++;
+            }
+        }
+        solve(boardarray);
+        sol_char = SolutionArray(boardarray);
+        return sol_char;
+    }
+    private static bool solve(char[,] board)
+    {
+        for (int i = 0; i < board.GetLength(0); i++)
+        {
+            for (int j = 0; j < board.GetLength(1); j++)
+            {
+                if (board[i, j] == '0')
+                {
+                    for (char c = '1'; c <= '9'; c++)
+                    {
+                        if (isValid(board, i, j, c))
+                        {
+                            board[i, j] = c;
+
+                            if (solve(board))
+                                return true;
+                            else
+                                board[i, j] = '.';
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    private static bool isValid(char[,] board, int row, int col, char c)
+    {
+
+        for (int i = 0; i < 9; i++)
+        {
+            //check row  
+            if (board[i, col] != '0' && board[i, col] == c)
+                return false;
+            //check column  
+            if (board[row, i] != '0' && board[row, i] == c)
+                return false;
+            //check 3*3 block  
+            if (board[3 * (row / 3) + i / 3, 3 * (col / 3) + i % 3] != '0' && board[3 * (row / 3) + i / 3, 3 * (col / 3) + i % 3] == c)
                 return false;
         }
-
-        // If the number is already that column, return false
-        for (int i = 0; i < size; i++)
-        {
-            if (grid[i, y] == value)
-                return false;
-        }
-
         return true;
     }
 
-    // Clears the board
-    private int[,] Clear_board(int [,] grid)
+    private static char[] SolutionArray(char[,] board)
     {
-        for(int i = 0; i < size; i++){
-            for(int j = 0; j < size; j++)
+        char[] solution_char = new char[81];
+        int Counter = 0;
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
             {
-                grid[i,j] = 0;
+                solution_char[Counter] = board[i, j];
             }
         }
-        return grid;
+        return solution_char;
     }
-
-    // Devlopes a solution board with only one solution - O(9^(n*n)) in worst case
-    private bool Solution_Board(int[,] grid, int x, int y)
+}
+public class SudokuEasyData : MonoBehaviour 
+{
+    public static List<SudokuData.SudokuBoardData> getData()
     {
-        //Check if 8th row and 9th column are reached
-        if (x == 8 && y == size)
-            return true;
+        
+        char [] board_char = HandleTextFile.ReadString("Assets/Resources/Easy.txt");
+        char[] solution_char = SudokuSolver.solveSudoku(board_char);
+        int[] Sudoku_board = board_char.Select(a => a - '0').ToArray();
+        int[] Sudoku_solution =solution_char.Select(a => a - '0').ToArray();
 
-        //If we are at the 9th column but not the 8th row, move to next row and reset column
-        if (y == size)
+        List<SudokuData.SudokuBoardData> data = new List<SudokuData.SudokuBoardData> ();
+
+        data.Add(new SudokuData.SudokuBoardData(Sudoku_board, Sudoku_solution));
+        return data;
+    }
+}
+
+public class SudokuMediumData : MonoBehaviour
+{
+    public static List<SudokuData.SudokuBoardData> getData()
+    {
+
+        char[] board_char = HandleTextFile.ReadString("Assets/Resources/Medium.txt");
+        char[] solution_char = SudokuSolver.solveSudoku(board_char);
+        int[] Sudoku_board = board_char.Select(a => a - '0').ToArray();
+        int[] Sudoku_solution = solution_char.Select(a => a - '0').ToArray();
+
+        List<SudokuData.SudokuBoardData> data = new List<SudokuData.SudokuBoardData>();
+
+        data.Add(new SudokuData.SudokuBoardData(Sudoku_board, Sudoku_solution));
+        return data;
+    }
+}
+
+public class SudokuHardData : MonoBehaviour
+{
+    public static List<SudokuData.SudokuBoardData> getData()
+    {
+
+        char[] board_char = HandleTextFile.ReadString("Assets/Resources/Hard.txt");
+        char[] solution_char = SudokuSolver.solveSudoku(board_char);
+        int[] Sudoku_board = board_char.Select(a => a - '0').ToArray();
+        int[] Sudoku_solution = solution_char.Select(a => a - '0').ToArray();
+
+        List<SudokuData.SudokuBoardData> data = new List<SudokuData.SudokuBoardData>();
+
+        data.Add(new SudokuData.SudokuBoardData(Sudoku_board, Sudoku_solution));
+        return data;
+    }
+}
+
+public class SudokuExpertData : MonoBehaviour
+{
+    public static List<SudokuData.SudokuBoardData> getData()
+    {
+
+        char[] board_char = HandleTextFile.ReadString("Assets/Resources/Expert.txt");
+        char[] solution_char = SudokuSolver.solveSudoku(board_char);
+        int[] Sudoku_board = board_char.Select(a => a - '0').ToArray();
+        int[] Sudoku_solution = solution_char.Select(a => a - '0').ToArray();
+
+        List<SudokuData.SudokuBoardData> data = new List<SudokuData.SudokuBoardData>();
+
+        data.Add(new SudokuData.SudokuBoardData(Sudoku_board, Sudoku_solution));
+        return data;
+    }
+}
+
+
+public class SudokuData : MonoBehaviour
+{
+    public static SudokuData Instance;
+
+    public struct SudokuBoardData
+    {
+        public int[] play_data;
+        public int[] solved_data;
+
+        public SudokuBoardData(int[] board, int[] solution) : this()
         {
-            x += 1; //Increase row value by 1
-            y = 0; //Resets column value to 0
+            this.play_data = board;
+            this.solved_data = solution;
         }
-        // If the grid is greater than 0
-        if (grid[x, y] > 0)
-            // Recursively iterate through the next column
-            Solution_Board(grid, x, y + 1); // Column increased by 1
+    };
 
-        // Must check if placing number in poition will break sudoku rules
-        for (int n = 1; n < size + 1; n++)
-        {
-            if (Check_space(grid, x, y, n) == true)
-            {
-                grid[x, y] = n;
-                if (Solution_Board(grid,x,y+1) == true)
-                    return true;  
-            }
-            grid[x, y] = 0;
-        }
-        return false;
-    }
-    
-    private int[,] Make_Game_Board(int[,] grid)
+    public Dictionary<string, List<SudokuBoardData>> sudoku_board = new Dictionary<string, List<SudokuBoardData>>();
+
+    private void Awake()
     {
-        int empty_box = 60; // We want 60 empty cells to make the game challenging
-        for (int i = 0; i < empty_box; i++)
-        {
-            //Remove the value at index [i//9][i%9], where i is a random number from 1-81, this guarantees that it will be random but calculated consistent index numbers
-            grid[i / size, i % size] = 0;
-        }
-        return grid;
+        if(Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
     }
 
-    public int[,] Generate_Solution_Board()
+   void Start()
     {
-        solution = Random_generation(solution_board);
-
-        if (Solution_Board(solution, 0, 0) == true)
-            print("It is true that there is only one solution");
-        return solution;
-    }
-
-    public int[,] Generate_Game_Board()
-    {
-        board = solution;  // Deep copy solution as a new array to make the game board on
-
-        board = Make_Game_Board(board);
-        return board;
+        sudoku_board.Add("Easy", SudokuEasyData.getData());
+        sudoku_board.Add("Medium", SudokuMediumData.getData());
+        sudoku_board.Add("Hard", SudokuHardData.getData());
+        sudoku_board.Add("Expert", SudokuExpertData.getData());
     }
 }

@@ -12,12 +12,13 @@ public class Grid : MonoBehaviour
     public float square_scale = 1.0f;
 
     private List<GameObject> grid_squares_ = new List<GameObject>();
+    private int select_grid_data = -1;
     void Start()
     {
         if (grid_square.GetComponent<GridSquare>() == null)
             Debug.LogError("Grid_square object needs to have GridSquare script attached!");
         CreateBoard();
-        SetGridNumbers();
+        SetGridNumbers("Easy");
     }
 
     // Update is called once per frame
@@ -73,21 +74,19 @@ public class Grid : MonoBehaviour
           }
     }
 
-    private void SetGridNumbers()
+    private void SetGridNumbers(string level)
     {
-        BoardGen BoardGen = new BoardGen();
-        int[,] solution = BoardGen.Generate_Solution_Board();
-        int[,] board = BoardGen.Generate_Game_Board();
-        foreach (var square in grid_squares_)
-        {
-            for(int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < columns; j++)
-                {
-                    square.GetComponent<GridSquare>().SetNumber(9);
-                }
-            }
+        select_grid_data = Random.Range(0, SudokuData.Instance.sudoku_board[level].Count);
+        var data = SudokuData.Instance.sudoku_board[level][select_grid_data];
 
+        SetGridData(data);
+    }
+
+    private void SetGridData(SudokuData.SudokuBoardData data)
+    {
+        for (int i = 0; i < grid_squares_.Count; i++)
+        {
+            grid_squares_[i].GetComponent<GridSquare>().SetNumber(data.play_data[i]);
         }
     }
 }
