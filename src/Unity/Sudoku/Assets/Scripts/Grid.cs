@@ -18,7 +18,7 @@ public class Grid : MonoBehaviour
         if (grid_square.GetComponent<GridSquare>() == null)
             Debug.LogError("Grid_square object needs to have GridSquare script attached!");
         CreateBoard();
-        SetGridNumbers("Easy");
+        SetGridNumbers(Game_Settings.Instance.GetGameMode());
     }
 
     // Update is called once per frame
