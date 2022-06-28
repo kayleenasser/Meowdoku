@@ -21,4 +21,13 @@ public class GameEvents : MonoBehaviour
         if (OnSelectedSquare != null)
             OnSelectedSquare(square_index);
     }
+
+    public delegate void WrongNumber();
+    public static event WrongNumber OnWrongNumber;
+
+    public static void OnWrongNumberFunc()
+    {
+        if (OnWrongNumber != null)
+            OnWrongNumber(); 
+    }
 }

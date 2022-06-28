@@ -80,17 +80,18 @@ public class Grid : MonoBehaviour
 
     private void SetGridNumbers(string level)
     {
-        select_grid_data = Random.Range(0, SudokuData.Instance.sudoku_board[level].Count);
-        var data = SudokuData.Instance.sudoku_board[level][select_grid_data];
+        select_grid_data = Random.Range(0, Sudoku_Data.Instance.sudoku_board[level].Count);
+        var data = Sudoku_Data.Instance.sudoku_board[level][select_grid_data];
 
         SetGridData(data);
     }
 
-    private void SetGridData(SudokuData.SudokuBoardData data)
+    private void SetGridData(Sudoku_Data.Sudoku_Board_Data data)
     {
         for (int i = 0; i < grid_squares_.Count; i++)
         {
             grid_squares_[i].GetComponent<GridSquare>().SetNumber(data.play_data[i]);
+            grid_squares_[i].GetComponent<GridSquare>().SetCorrectNumber(data.solved_data[i]);
         }
     }
 }
