@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8032154429252525522}
   - component: {fileID: 8032154429252525521}
   m_Layer: 5
-  m_Name: Image
+  m_Name: SquareGraphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 8032154429596763024}
   - component: {fileID: 8032154429596763025}
   m_Layer: 5
-  m_Name: 'Text '
+  m_Name: SquareText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,7 +228,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.7028302, g: 1, b: 0.98121357, a: 1}
     m_PressedColor: {r: 0.7019608, g: 1, b: 0.98039216, a: 1}
-    m_SelectedColor: {r: 0.5235849, g: 1, b: 0.9686569, a: 1}
+    m_SelectedColor: {r: 0, g: 1, b: 0.9329896, a: 1}
     m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

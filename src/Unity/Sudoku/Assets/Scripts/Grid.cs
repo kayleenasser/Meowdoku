@@ -35,13 +35,17 @@ public class Grid : MonoBehaviour
 
     private void GetSquares()
     {
+        int square_i = 0;
         for(int row = 0; row < rows; row++)
         {
             for(int column = 0; column < columns; column++)
             {
                 grid_squares_.Add(Instantiate(grid_square) as GameObject);
+                grid_squares_[grid_squares_.Count - 1].GetComponent<GridSquare>().SetIndex(square_i);
                 grid_squares_[grid_squares_.Count - 1].transform.parent = this.transform; ///Instantiatet this game object as a child of the object holding this script
                 grid_squares_[grid_squares_.Count - 1].transform.localScale = new Vector3(square_scale, square_scale, square_scale);
+
+                square_i++;
             }
         }
     }
