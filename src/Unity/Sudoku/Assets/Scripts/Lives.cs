@@ -5,6 +5,7 @@ using UnityEngine;
 public class Lives : MonoBehaviour
 {
     public List<GameObject> error_image;
+    public GameObject game_over;
     int lives = 0;
     int error_num = 0;
 
@@ -20,6 +21,16 @@ public class Lives : MonoBehaviour
         error_image[error_num].SetActive(true);
         error_num++;
         lives--;
+        }
+
+        Check_Game_Over();
+    }
+
+    private void Check_Game_Over()
+    {
+        if (lives <= 0)
+        {
+            game_over.SetActive(true);
         }
     }
 
