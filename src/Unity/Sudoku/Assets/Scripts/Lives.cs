@@ -30,6 +30,7 @@ public class Lives : MonoBehaviour
     {
         if (lives <= 0)
         {
+            GameEvents.OnGameOverFunc();
             game_over.SetActive(true);
         }
     }

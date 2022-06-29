@@ -30,4 +30,15 @@ public class GameEvents : MonoBehaviour
         if (OnWrongNumber != null)
             OnWrongNumber(); 
     }
+
+    public delegate void GameOver();
+    public static event GameOver OnGameOver;
+
+    public static void OnGameOverFunc()
+    {
+        if(OnGameOver != null)
+        {
+            OnGameOver();
+        }
+    }
 }
