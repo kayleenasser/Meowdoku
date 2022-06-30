@@ -61,7 +61,7 @@ public class Sudoku_Solver : MonoBehaviour
         // Check if placing a number here will break rules of sudoku 
         for(int num = 1; num < 10; num++) // Gets a number from 1-9 to see if its safe to place
         {
-            if (Check_Valid(board, row, col, num)) // Call on the rule checking function
+            if (Check_Space(board, row, col, num)) // Call on the rule checking function
             {
                 board[row, col] = num; // If it is safe, place the number there there
                 if (Solve(board, row, col + 1))
@@ -71,17 +71,18 @@ public class Sudoku_Solver : MonoBehaviour
         }
         return false;
     }
-    private static bool Check_Valid(int[,] board, int row, int col, int value)
+    private static bool Check_Space(int[,] board, int row, int col, int value)
     {
         // Look at the 3 x 3 box, if the number is already there, return false
-
-        for (int i = 0; i < 3; i++)
-        {
-            int row_box = 3 * (row / 3) + i / 3;
-            int col_box = 3 * (col / 3) + i % 3;
-
-            if (board[row_box, col_box] != 0 && board[row_box, col_box] == value)
-                return false;
+        int row_beginning = row - row % 3;
+        int col_beginning = col - col % 3;
+        for (int i = 0; i < 3; i++) 
+        { 
+            for (int j = 0; j < 3; j++)
+            {
+                if (board[i + row_beginning, j + col_beginning] == value)
+                    return false;
+            }
         }
 
         // If the number is already in that row, return false

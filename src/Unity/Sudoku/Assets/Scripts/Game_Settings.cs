@@ -17,6 +17,7 @@ public class Game_Settings : MonoBehaviour
 
     private void Awake()
     {
+        paused = false;
         if (Instance == null)
         {
             DontDestroyOnLoad(this);
@@ -27,7 +28,10 @@ public class Game_Settings : MonoBehaviour
     }
 
     private EGameMode _GameMode;
+    private bool paused = false;
 
+    public void Set_Pause(bool paused_game) { paused = paused_game; }
+    public bool Get_Pause() { return paused; }
     private void Start()
     {
         _GameMode = EGameMode.NONE;
@@ -38,11 +42,11 @@ public class Game_Settings : MonoBehaviour
         _GameMode = mode;
     }
 
-    public void SetGameMode(string mode) 
+    public void SetGameMode(string mode)
     {
         if (mode == "Easy") SetGameMode(EGameMode.EASY);
         else if (mode == "Medium") SetGameMode(EGameMode.MEDIUM);
-        else  if (mode == "Hard") SetGameMode(EGameMode.HARD);
+        else if (mode == "Hard") SetGameMode(EGameMode.HARD);
         else if (mode == "Expert") SetGameMode(EGameMode.EXPERT);
         else SetGameMode(EGameMode.NONE);
     }
