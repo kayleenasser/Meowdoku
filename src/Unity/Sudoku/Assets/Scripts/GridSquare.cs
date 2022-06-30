@@ -84,7 +84,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
             if (num != correct_num)
             {
                 var colors = this.colors;
-                colors.normalColor = Color.red;
+                colors.normalColor = Color.red; 
                 this.colors = colors;
 
                 GameEvents.OnWrongNumberFunc();
