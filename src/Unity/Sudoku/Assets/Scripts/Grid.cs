@@ -11,6 +11,7 @@ public class Grid : MonoBehaviour
     public Vector2 start_position = new(0.0f, 0.0f);
     public float square_scale = 1.0f;
     public float gap = 0.1f;
+    public Color highlight_colour = Color.cyan;
 
     private List<GameObject> grid_squares_ = new List<GameObject>();
     private int select_grid_data = -1;
@@ -110,5 +111,39 @@ public class Grid : MonoBehaviour
             grid_squares_[i].GetComponent<GridSquare>().SetCorrectNumber(data.solved_data[i]);
             grid_squares_[i].GetComponent<GridSquare>().Set_Default_Value(data.play_data[i] != 0 && data.play_data[i] == data.solved_data[i]);
         }
+    }
+
+    private void OnEnable()
+    {
+        GameEvents.OnSelectedSquare += OnSquareSelected;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnSelectedSquare -= OnSquareSelected;
+    }
+
+    private void Set_Square_colour(int[] data, Color color)
+    {
+        foreach(var index in data)
+        {
+            var comp = grid_squares_[index].GetComponent<GridSquare>();
+            if(comp.Wrong_Square_Value() == false &&  comp.IsSelected() == false)
+            {
+                comp.Set_Square_Colour(color);
+            }
+        }
+    }
+
+    public void OnSquareSelected(int square_index)
+    {
+        var hori_line = Highlight.instance.Get_Row_Line(square_index);
+        var vert_line = Highlight.instance.Get_Col_Line(square_index);
+        var square_box = Highlight.instance.Get_Big_Square(square_index);
+
+        Set_Square_colour(Highlight.instance.Get_Indices(), Color.white);
+        Set_Square_colour(hori_line, highlight_colour);
+        Set_Square_colour(vert_line, highlight_colour);
+        Set_Square_colour(square_box, highlight_colour);
     }
 }
