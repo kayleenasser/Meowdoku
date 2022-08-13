@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Linq;
+using UnityEngine.Networking;
+
 public class Handle_Data_File
-{   
+{
     public static char[] ReadString(string path)
     {
-        char[] CharacterArray = new char[81];
-        //Read the text from directly from the test.txt file
-        int ran_line = Random.Range(1, 10000);
-        Debug.Log(ran_line);
 
-        string[] stringdata = File.ReadAllLines(path);
+        TextAsset file = Resources.Load(path) as TextAsset;
+        string text_string = file.ToString();
+        string[] stringdata = text_string.Split('\n');
+
+        char[] CharacterArray = new char[81];
+        int ran_line = Random.Range(1, 10000);
+        //string[] stringdata = File.ReadAllLines("Assets/Text/"+ path);
         string line_string = stringdata[ran_line];
 
         for (int i = 0; i < 81; i++)
@@ -120,7 +124,7 @@ public class SudokuEasyData : MonoBehaviour
     public static List<Sudoku_Data.Sudoku_Board_Data> getData()
     {
         
-        char [] board_char = Handle_Data_File.ReadString("Assets/Resources/Easy.txt");
+        char [] board_char = Handle_Data_File.ReadString("Easy");
         int[] Sudoku_board = board_char.Select(a => a - '0').ToArray();
         int[] Sudoku_solution = Sudoku_Solver.Get_Solution(Sudoku_board);
 
@@ -135,7 +139,7 @@ public class SudokuMediumData : MonoBehaviour
 {
     public static List<Sudoku_Data.Sudoku_Board_Data> getData()
     {
-        char[] board_char = Handle_Data_File.ReadString("Assets/Resources/Medium.txt");
+        char[] board_char = Handle_Data_File.ReadString("Medium");
         int[] Sudoku_board = board_char.Select(a => a - '0').ToArray();
         int[] Sudoku_solution = Sudoku_Solver.Get_Solution(Sudoku_board);
 
@@ -151,7 +155,7 @@ public class SudokuHardData : MonoBehaviour
     public static List<Sudoku_Data.Sudoku_Board_Data> getData()
     {
 
-        char[] board_char = Handle_Data_File.ReadString("Assets/Resources/Hard.txt");
+        char[] board_char = Handle_Data_File.ReadString("Hard");
         int[] Sudoku_board = board_char.Select(a => a - '0').ToArray();
         int[] Sudoku_solution = Sudoku_Solver.Get_Solution(Sudoku_board);
 
@@ -166,7 +170,7 @@ public class SudokuExpertData : MonoBehaviour
 {
     public static List<Sudoku_Data.Sudoku_Board_Data> getData()
     {
-        char[] board_char = Handle_Data_File.ReadString("Assets/Resources/Expert.txt");
+        char[] board_char = Handle_Data_File.ReadString("Expert");
         int[] Sudoku_board = board_char.Select(a => a - '0').ToArray();
         int[] Sudoku_solution = Sudoku_Solver.Get_Solution(Sudoku_board);
 

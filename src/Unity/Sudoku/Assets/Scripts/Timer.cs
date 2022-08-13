@@ -29,6 +29,10 @@ public class Timer : MonoBehaviour
     }
     void Update()
     {
+        if(Game_Settings.Instance.Get_Pause() == true)
+            stop_time = true;
+        else
+            stop_time=false;
         if(stop_time == false)
         {
             timer_value += Time.deltaTime;
@@ -60,6 +64,7 @@ public class Timer : MonoBehaviour
     {
         GameEvents.OnGameOver -= GameOverTime; 
     }
+
     public Text Get_Time()
     {
         return timer_text;

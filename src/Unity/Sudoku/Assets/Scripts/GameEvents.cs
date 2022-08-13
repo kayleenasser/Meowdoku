@@ -41,4 +41,14 @@ public class GameEvents : MonoBehaviour
             OnGameOver();
         }
     }
+
+    // --------------------------------
+
+    public delegate void NotesOn(bool toggle);
+    public static event NotesOn OnNotesOn;
+
+    public static void NotesOnFunc(bool toggle)
+    {
+        OnNotesOn?.Invoke(toggle);
+    }
 }

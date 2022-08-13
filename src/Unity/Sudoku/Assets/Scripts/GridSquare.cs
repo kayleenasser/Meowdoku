@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPointerUpHandler, IPointerExitHandler
 {
     public GameObject number_text;
+    public List<GameObject> note_list;
+    private bool toggle_note;
     private int num = 0;
     private int correct_num = 0;
 
@@ -23,8 +25,67 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
 
     void Start()
     {
+        toggle_note = false;
         selected = IsSelected();
         selected = false;
+        Set_Note(0);
+    }
+
+    public List<string> Get_Note() { 
+        List<string> notes = new List<string>();
+        foreach (var number in note_list) {
+            notes.Add(number.GetComponent<Text>().text);
+        }
+        return notes;
+    }
+
+    private void SetClearNotes()
+    {
+        foreach (var number in note_list)
+        {
+            if (number.GetComponent<Text>().text == "0")
+            {
+                number.GetComponent<Text>().text = " ";
+            }
+        }
+    }
+
+    private void Set_Note(int value) {
+        foreach (var number in note_list)
+        {
+            if(value <= 0)
+                number.GetComponent<Text>().text = " ";
+            else
+                number.GetComponent<Text>().text =  value.ToString();
+        }
+    }
+
+    private void SetOneNumberNote(int value, bool update = false)
+    {
+        if (toggle_note == false && update == false)
+            return;
+        if (value <= 0)
+            note_list[value - 1].GetComponent<Text>().text = " ";
+        else
+        {
+            if (note_list[value - 1].GetComponent<Text>().text == " " || update)
+                note_list[value - 1].GetComponent<Text>().text = value.ToString();
+            else
+                note_list[value - 1].GetComponent <Text>().text = " ";
+        }
+    }
+
+    public void SetGridNotes(List<int> notes)
+    {
+        foreach (var note in notes)
+        {
+            SetOneNumberNote(note, true);
+        }
+    }
+
+    public void On_Toggle_Note(bool active)
+    {
+        toggle_note = active;
     }
 
     public bool IsSelected() { return selected; }
@@ -70,6 +131,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
     {
         GameEvents.OnPlaceNumber += OnSetNumber;
         GameEvents.OnSelectedSquare += OnSelectedSquare;
+        GameEvents.OnNotesOn += On_Toggle_Note;
     }
 #pragma warning disable CS0114 // Member hides inherited member; missing override keyword
     private void OnDisable()
@@ -77,6 +139,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
     {
         GameEvents.OnPlaceNumber -= OnSetNumber;
         GameEvents.OnSelectedSquare -= OnSelectedSquare;
+        GameEvents.OnNotesOn -= On_Toggle_Note;
     }
 
     public void OnSetNumber(int number)
@@ -84,23 +147,30 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
         selected = IsSelected();
         if (selected && default_value == false)
         {
-            SetNumber(number);
-            if (num != correct_num)
+            if(toggle_note == true && is_wrong == false)
             {
-                is_wrong = true;
-                var colors = this.colors;
-                colors.normalColor = Color.red; 
-                this.colors = colors;
-
-                GameEvents.OnWrongNumberFunc();
+                SetOneNumberNote(number);
             }
-            else
+            else if(toggle_note == false)
             {
-                is_wrong = false;
-                default_value = true;
-                var colors = this.colors;
-                colors.normalColor = Color.white;
-                this.colors = colors;
+                SetNumber(number);
+                if (num != correct_num)
+                {
+                    is_wrong = true;
+                    var colors = this.colors;
+                    colors.normalColor = Color.red;
+                    this.colors = colors;
+
+                    GameEvents.OnWrongNumberFunc();
+                }
+                else
+                {
+                    is_wrong = false;
+                    default_value = true;
+                    var colors = this.colors;
+                    colors.normalColor = Color.white;
+                    this.colors = colors;
+                }
             }
         }
     }
