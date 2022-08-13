@@ -18,6 +18,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
     private bool default_value = false;
     private bool is_wrong = false;
 
+    public bool is_correct() { return num == correct_num; }
     public bool Wrong_Square_Value(){ return is_wrong; }
 
     public void Set_Default_Value(bool deflt){ default_value = deflt; }
@@ -29,6 +30,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
         selected = IsSelected();
         selected = false;
         Set_Note(0);
+        SetClearNotes();
     }
 
     public List<string> Get_Note() { 
@@ -153,6 +155,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
             }
             else if(toggle_note == false)
             {
+                Set_Note(0);
                 SetNumber(number);
                 if (num != correct_num)
                 {
@@ -172,6 +175,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
                     this.colors = colors;
                 }
             }
+            GameEvents.OnCheckCompleteFunc();   // Check if game should be over
         }
     }
 

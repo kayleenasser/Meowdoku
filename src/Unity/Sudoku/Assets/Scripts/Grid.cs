@@ -6,6 +6,7 @@ public class Grid : MonoBehaviour
 {
     public int columns = 0;
     public int rows = 0;
+    public int counter = 0;
     public float square_offset = 0.0f;
     public GameObject grid_square;
     public Vector2 start_position = new(0.0f, 0.0f);
@@ -116,12 +117,15 @@ public class Grid : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.OnSelectedSquare += OnSquareSelected;
+        GameEvents.OnCheckComplete += CheckCompletion;
     }
 
     private void OnDisable()
     {
         GameEvents.OnSelectedSquare -= OnSquareSelected;
+        GameEvents.OnCheckComplete -= CheckCompletion;
     }
+
 
     private void Set_Square_colour(int[] data, Color color)
     {
@@ -145,5 +149,17 @@ public class Grid : MonoBehaviour
         Set_Square_colour(hori_line, highlight_colour);
         Set_Square_colour(vert_line, highlight_colour);
         Set_Square_colour(square_box, highlight_colour);
+    }
+
+    private void CheckCompletion()
+    {
+        foreach(var square in grid_squares_)
+        {
+            var complete = square.GetComponent<GridSquare>();
+            if (complete.is_correct() == false)
+                return;
+        }
+
+        GameEvents.OnBoardFullFunc();
     }
 }

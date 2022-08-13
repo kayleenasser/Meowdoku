@@ -45,10 +45,34 @@ public class GameEvents : MonoBehaviour
     // --------------------------------
 
     public delegate void NotesOn(bool toggle);
-    public static event NotesOn OnNotesOn;
+    public static event NotesOn OnNotesOn; 
 
     public static void NotesOnFunc(bool toggle)
     {
         OnNotesOn?.Invoke(toggle);
+    }
+
+
+    // -----------
+
+
+    public delegate void BoardFull();
+    public static event BoardFull OnBoardFull;
+
+    public static void OnBoardFullFunc()
+    {
+        if (OnBoardFull != null) { 
+            OnBoardFull();
+        }    
+    }
+
+    public delegate void CheckComplete();
+    public static event CheckComplete OnCheckComplete;
+
+    public static void OnCheckCompleteFunc()
+    {
+        if (OnCheckComplete != null) {
+            OnCheckComplete();
+        }
     }
 }
