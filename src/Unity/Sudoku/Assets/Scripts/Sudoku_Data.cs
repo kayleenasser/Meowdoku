@@ -75,7 +75,7 @@ public class Sudoku_Solver : MonoBehaviour
         return false;
     }
     private static bool Check_Space(int[,] board, int row, int col, int value)
-    {
+    { 
         // Look at the 3 x 3 box, if the number is already there, return false
         int row_beginning = row - row % 3;
         int col_beginning = col - col % 3;
