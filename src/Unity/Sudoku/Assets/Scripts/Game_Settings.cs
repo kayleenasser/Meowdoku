@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Game_Settings : MonoBehaviour
 {
-    public enum EGameMode
+    public enum Game_Mode_Names // Gamemodes
     {
         NONE,
         EASY,
@@ -27,39 +27,49 @@ public class Game_Settings : MonoBehaviour
             Destroy(this);
     }
 
-    private EGameMode _GameMode;
+    private Game_Mode_Names Game_Mode;
     private bool paused = false;
+    private bool game_over = false;
+    private bool win = false;
 
     public void Set_Pause(bool paused_game) { paused = paused_game; }
     public bool Get_Pause() { return paused; }
+
+    public void Set_Game_Over(bool game_over_stop) { game_over = game_over_stop; }
+    public bool Get_Game_Over() { return game_over; }
+
+    public void Set_Win(bool win_stop) { win = win_stop; }
+    public bool Get_Win() { return win; }
+
+
     private void Start()
     {
-        _GameMode = EGameMode.NONE;
+        Game_Mode = Game_Mode_Names.NONE;
     }
 
-    public void SetGameMode(EGameMode mode)
+    public void SetGameMode(Game_Mode_Names mode)
     {
-        _GameMode = mode;
+        Game_Mode = mode;
     }
 
     public void SetGameMode(string mode)
     {
-        if (mode == "Easy") SetGameMode(EGameMode.EASY);
-        else if (mode == "Medium") SetGameMode(EGameMode.MEDIUM);
-        else if (mode == "Hard") SetGameMode(EGameMode.HARD);
-        else if (mode == "Expert") SetGameMode(EGameMode.EXPERT);
-        else SetGameMode(EGameMode.NONE);
+        if (mode == "Easy") SetGameMode(Game_Mode_Names.EASY);
+        else if (mode == "Medium") SetGameMode(Game_Mode_Names.MEDIUM);
+        else if (mode == "Hard") SetGameMode(Game_Mode_Names.HARD);
+        else if (mode == "Expert") SetGameMode(Game_Mode_Names.EXPERT);
+        else SetGameMode(Game_Mode_Names.NONE);
     }
 
-    public string GetGameMode()
+    public string Get_Game_Mode()
     {
-        switch (_GameMode)
+        switch (Game_Mode)
         {
-            case EGameMode.EASY: return "Easy";
-            case EGameMode.MEDIUM: return "Medium";
-            case EGameMode.HARD: return "Hard";
-            case EGameMode.EXPERT: return "Expert";
-            case EGameMode.NONE: return "None";
+            case Game_Mode_Names.EASY: return "Easy";
+            case Game_Mode_Names.MEDIUM: return "Medium";
+            case Game_Mode_Names.HARD: return "Hard";
+            case Game_Mode_Names.EXPERT: return "Expert";
+            case Game_Mode_Names.NONE: return "None";
         }
         Debug.LogError("Error: Game difficult not set");
         return " ";

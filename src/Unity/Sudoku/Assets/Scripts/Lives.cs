@@ -13,6 +13,7 @@ public class Lives : MonoBehaviour
     {
         lives = error_image.Count;
         error_num = 0;
+        Set_Game_Over_Menu(false);
     }
 
     private void WrongNumber()
@@ -30,18 +31,24 @@ public class Lives : MonoBehaviour
     {
         if (lives <= 0)
         {
-            GameEvents.OnGameOverFunc();
+            Game_Events.On_Game_Over_Func();
             game_over.SetActive(true);
+            Set_Game_Over_Menu(true);
         }
+    }
+
+    public void Set_Game_Over_Menu(bool game_over_bool)
+    {
+        Game_Settings.Instance.Set_Game_Over(game_over_bool);
     }
 
     private void OnEnable()
     {
-        GameEvents.OnWrongNumber += WrongNumber;
+        Game_Events.On_Wrong_Number += WrongNumber;
     }
 
     private void OnDisable()
     {
-        GameEvents.OnWrongNumber -= WrongNumber;    
+        Game_Events.On_Wrong_Number -= WrongNumber;    
     }
 }

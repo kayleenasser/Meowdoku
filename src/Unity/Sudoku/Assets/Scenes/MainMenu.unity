@@ -251,8 +251,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 577473530}
-        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
-        m_MethodName: ActivateObject
+        m_TargetAssemblyTypeName: Menu_Buttons, Assembly-CSharp
+        m_MethodName: Activate_Object
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 151797523}
@@ -559,8 +559,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 577473530}
-        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
-        m_MethodName: LoadEasy
+        m_TargetAssemblyTypeName: Menu_Buttons, Assembly-CSharp
+        m_MethodName: Load_Easy
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5815,8 +5815,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 577473530}
-        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
-        m_MethodName: LoadMedium
+        m_TargetAssemblyTypeName: Menu_Buttons, Assembly-CSharp
+        m_MethodName: Load_Medium
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6255,8 +6255,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 577473530}
-        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
-        m_MethodName: DeactivateObject
+        m_TargetAssemblyTypeName: Menu_Buttons, Assembly-CSharp
+        m_MethodName: Deactivate_Object
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 151797523}
@@ -6464,8 +6464,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 577473530}
-        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
-        m_MethodName: LoadExpert
+        m_TargetAssemblyTypeName: Menu_Buttons, Assembly-CSharp
+        m_MethodName: Load_Expert
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6785,8 +6785,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 577473530}
-        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
-        m_MethodName: DeactivateObject
+        m_TargetAssemblyTypeName: Menu_Buttons, Assembly-CSharp
+        m_MethodName: Deactivate_Object
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2141304059}
@@ -6797,8 +6797,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 577473530}
-        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
-        m_MethodName: ActivateObject
+        m_TargetAssemblyTypeName: Menu_Buttons, Assembly-CSharp
+        m_MethodName: Activate_Object
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1062099529}
@@ -7010,8 +7010,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 577473530}
-        m_TargetAssemblyTypeName: MenuButtons, Assembly-CSharp
-        m_MethodName: LoadHard
+        m_TargetAssemblyTypeName: Menu_Buttons, Assembly-CSharp
+        m_MethodName: Load_Hard
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -23,6 +23,6 @@ public class Notes : Selectable, IPointerClickHandler
         else
             GetComponent<Image>().sprite = Off_image;
 
-        GameEvents.NotesOnFunc(toggle);
+        Game_Events.Notes_On_Func(toggle);
     }
 }

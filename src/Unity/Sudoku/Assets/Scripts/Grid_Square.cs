@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPointerUpHandler, IPointerExitHandler
+public class Grid_Square : Selectable, IPointerClickHandler, ISubmitHandler, IPointerUpHandler, IPointerExitHandler
 {
     public GameObject number_text;
     public List<GameObject> note_list;
@@ -18,7 +18,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
     private bool default_value = false;
     private bool is_wrong = false;
 
-    public bool is_correct() { return num == correct_num; }
+    public bool Is_correct() { return num == correct_num; }
     public bool Wrong_Square_Value(){ return is_wrong; }
 
     public void Set_Default_Value(bool deflt){ default_value = deflt; }
@@ -120,7 +120,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
     {
         selected = IsSelected();
         selected = true;
-        GameEvents.SquareSelectedFunc(square_index);
+        Game_Events.Square_Selected_Func(square_index);
     }
 
     public void OnSubmit(BaseEventData eventData)
@@ -131,17 +131,17 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
     private void OnEnable()
 #pragma warning restore CS0114 // Member hides inherited member; missing override keyword
     {
-        GameEvents.OnPlaceNumber += OnSetNumber;
-        GameEvents.OnSelectedSquare += OnSelectedSquare;
-        GameEvents.OnNotesOn += On_Toggle_Note;
+        Game_Events.On_Place_Number += OnSetNumber;
+        Game_Events.On_Selected_Square += OnSelectedSquare;
+        Game_Events.On_Notes_On += On_Toggle_Note;
     }
 #pragma warning disable CS0114 // Member hides inherited member; missing override keyword
     private void OnDisable()
 #pragma warning restore CS0114 // Member hides inherited member; missing override keyword
     {
-        GameEvents.OnPlaceNumber -= OnSetNumber;
-        GameEvents.OnSelectedSquare -= OnSelectedSquare;
-        GameEvents.OnNotesOn -= On_Toggle_Note;
+        Game_Events.On_Place_Number -= OnSetNumber;
+        Game_Events.On_Selected_Square -= OnSelectedSquare;
+        Game_Events.On_Notes_On -= On_Toggle_Note;
     }
 
     public void OnSetNumber(int number)
@@ -164,7 +164,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
                     colors.normalColor = Color.red;
                     this.colors = colors;
 
-                    GameEvents.OnWrongNumberFunc();
+                    Game_Events.On_Wrong_Number_Func();
                 }
                 else
                 {
@@ -175,7 +175,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
                     this.colors = colors;
                 }
             }
-            GameEvents.OnCheckCompleteFunc();   // Check if game should be over
+            Game_Events.On_Check_Complete_Func();   // Check if game should be over
         }
     }
 

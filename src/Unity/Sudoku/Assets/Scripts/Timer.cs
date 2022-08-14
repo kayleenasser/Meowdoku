@@ -4,10 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 public class Timer : MonoBehaviour
-{
-    private int hour = 0;
-    private int minute = 0;
-    private int second = 0;
+{ 
 
     private Text timer_text;
     private float timer_value;
@@ -29,7 +26,7 @@ public class Timer : MonoBehaviour
     }
     void Update()
     {
-        if(Game_Settings.Instance.Get_Pause() == true)
+        if(Game_Settings.Instance.Get_Pause() || Game_Settings.Instance.Get_Game_Over() || Game_Settings.Instance.Get_Win())
             stop_time = true;
         else
             stop_time=false;
@@ -51,18 +48,26 @@ public class Timer : MonoBehaviour
         return n.ToString().PadLeft(2, '0');
     }
 
-    public void GameOverTime()
+    public void Game_Over_Time() // Stop time on Game Over
+    {
+        stop_time = true;
+    }
+
+    public void Win_Time() // Stop time on Win
     {
         stop_time = true;
     }
 
     private void OnEnable()
     {
-        GameEvents.OnGameOver += GameOverTime;
+        Game_Events.On_Game_Over += Game_Over_Time;
+        Game_Events.On_Win += Win_Time;
     }
+
     private void OnDisable()
     {
-        GameEvents.OnGameOver -= GameOverTime; 
+        Game_Events.On_Game_Over -= Game_Over_Time; 
+        Game_Events.On_Win -= Win_Time;
     }
 
     public Text Get_Time()

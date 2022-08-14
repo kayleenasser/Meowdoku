@@ -9,19 +9,26 @@ public class Win : MonoBehaviour
     void Start()
     {
         WinScreen.SetActive(false);
+        Set_Win_Menu(false);
     }
 
-    private void OnBoardFull()
+    private void On_Board_Full()
     {
-        WinScreen.SetActive(true);
+        WinScreen.SetActive(true); // Win screen popup appears
+        Set_Win_Menu(true);
+    }
+
+    public void Set_Win_Menu(bool win) // Stops win time
+    {
+        Game_Settings.Instance.Set_Win(win);
     }
 
     private void OnEnable()
     {
-        GameEvents.OnBoardFull += OnBoardFull;
+        Game_Events.On_Board_Full += On_Board_Full;
     }
     private void OnDisable()
     {
-        GameEvents.OnBoardFull -= OnBoardFull;
+        Game_Events.On_Board_Full -= On_Board_Full;
     }
 }

@@ -5,18 +5,13 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class NumberButton : Selectable, IPointerClickHandler, ISubmitHandler, IPointerUpHandler, IPointerExitHandler
+public class Number_Button : Selectable, IPointerClickHandler, ISubmitHandler, IPointerUpHandler, IPointerExitHandler
 {
     public int value;
 
-    private void Start()
-    {
-
-    }
-
     public void OnPointerClick(PointerEventData eventData)
     {
-        GameEvents.PlaceNumberFunc(value);
+        Game_Events.Place_Number_Func(value);
     }
 
     public void OnSubmit(BaseEventData eventData)
