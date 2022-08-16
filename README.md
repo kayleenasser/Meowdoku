@@ -1,3 +1,14 @@
-# Sudoku
-My favourite game :)
-Right now this is just a command line game where you call on sudoku.py and play the game by entering the rows and columns you want to place numbers in. I will be translating this python code to C#, and hopefully will be implementing an animated and aesthetically pleasing sudoku game in unity. For now, enjoy command line game!
+# Meowdoku
+Programmed in Unity and soon to be avaliable for download on Android, Meowdoku is a fun cute sudoku game with cat themed UI elements and animations. 
+Features:
+    - Settings (with volume slider)
+    - Music
+    - How to Play
+    - 4 Difficulties (Easy, Medium, Hard, Expert)
+    - Notes functionality
+To do:
+    - Continue/Save feature
+    - Undo/Eraser button
+Future updates:
+    - Endless mode (play until completion, no lives or help)
+    - Hints
