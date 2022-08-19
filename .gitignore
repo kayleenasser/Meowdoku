@@ -9,16 +9,16 @@ __pycache__/
 src/.idea/
 .idea/
 
-src/Unity/Sudoku/Sudoku.sln
-src/Unity/Sudoku/obj/Debug
-src/Unity/Sudoku/Assembly-CSharp.csproj
-src/Unity/Sudoku/Library
-src/Unity/Sudoku/Logs
-src/Unity/Sudoku/Packages
-src/Unity/Sudoku/ProjectSettings
-src/Unity/Sudoku/Temp
-src/Unity/Sudoku/UserSettings
-src/Unity/Sudoku/.vsconfig
+src/Unity/Meowdoku/Sudoku.sln
+src/Unity/Meowdoku/obj/Debug
+src/Unity/Meowdoku/Assembly-CSharp.csproj
+src/Unity/Meowdoku/Library
+src/Unity/Meowdoku/Logs
+src/Unity/Meowdoku/Packages
+src/Unity/Meowdoku/ProjectSettings
+src/Unity/Meowdoku/Temp
+src/Unity/Meowdoku/UserSettings
+src/Unity/Meowdoku/.vsconfig
 # Distribution / packaging
 .Python
 build/
