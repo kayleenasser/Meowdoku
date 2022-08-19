@@ -10,6 +10,7 @@ src/.idea/
 .idea/
 
 src/Unity/Meowdoku/Sudoku.sln
+src/Unity/Meowdoku/Meowdoku.sln
 src/Unity/Meowdoku/obj/Debug
 src/Unity/Meowdoku/Assembly-CSharp.csproj
 src/Unity/Meowdoku/Library
@@ -19,6 +20,7 @@ src/Unity/Meowdoku/ProjectSettings
 src/Unity/Meowdoku/Temp
 src/Unity/Meowdoku/UserSettings
 src/Unity/Meowdoku/.vsconfig
+src/Unity/Meowdoku/.vs
 # Distribution / packaging
 .Python
 build/
