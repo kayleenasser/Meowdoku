@@ -11,7 +11,7 @@ Programmed in C# and developed using the Unity Engine and soon to be avaliable f
 
 ### To do:
 - Continue/Save feature
-- Undo/Eraser button
+- Anchor back and notes/erase button to scale with different screen sizes
 
 ### Future updates:
 - Endless mode (play until completion, no lives or help)
