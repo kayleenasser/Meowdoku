@@ -1,6 +1,9 @@
 # Meowdoku
 ## A Sudoku Android App
 Programmed in C# and developed using the Unity Engine and soon to be avaliable for download on Android, Meowdoku is a fun cute sudoku game with cat themed UI elements and animations. 
+Every element of the UI was hand-drawn. Animations done by hand frame-by-frame. All assets are original, made by me (Kaylee Nasser).
+
+Sudoku background music created by AstroForte.
 
 ### Features:
 - Settings (with volume slider)
