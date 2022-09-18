@@ -7,11 +7,12 @@ Programmed in C# and developed using the Unity Engine and soon to be avaliable f
 - Music
 - How to Play
 - 4 Difficulties (Easy, Medium, Hard, Expert)
-- Notes functionality
+- Notes - (1 - 9 can be placed in one box)
+- Eraser - Erases everything in a box
 
 ### To do:
 - Continue/Save feature
-- Anchor back and notes/erase button to scale with different screen sizes
+- Anchor buttons differently - i.e. back button on main menu
 
 ### Future updates:
 - Endless mode (play until completion, no lives or help)
