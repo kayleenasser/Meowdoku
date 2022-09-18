@@ -7,7 +7,8 @@ Programmed in C# and developed using the Unity Engine and soon to be avaliable f
 - Music
 - How to Play
 - 4 Difficulties (Easy, Medium, Hard, Expert)
-- Notes - (1 - 9 can be placed in one box)
+- Lives - 3 Mistakes before game over
+- Notes - 1 - 9 can be placed in one box without affecting lives
 - Eraser - Erases everything in a box
 
 ### To do:
