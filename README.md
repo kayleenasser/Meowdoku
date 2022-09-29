@@ -5,6 +5,8 @@ Every element of the UI was hand-drawn. Animations done by hand frame-by-frame. 
 
 Sudoku background music created by AstroForte.
 
+![Main Menu Screenshot](Screenshots/"Main Menu".png)
+
 ### Features:
 - Settings (with volume slider)
 - Music
